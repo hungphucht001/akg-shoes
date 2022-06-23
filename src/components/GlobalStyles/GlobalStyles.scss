@@ -8,6 +8,8 @@
 
 :root{
     --color-white: #fff;
+    --color-dark: #1E1C1A;
+    --color-shining: #FFFDF9;
 }
 
 * {
@@ -55,4 +57,7 @@ button{
     outline: none;
     padding: 10px 20px;
     cursor: pointer;
+}
+.text-center{
+    text-align: center;
 }

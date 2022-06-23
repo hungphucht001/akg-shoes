@@ -1,0 +1,24 @@
+.footer{
+    background-color: var(--color-dark);
+    .container{
+        max-width: 920px;
+        flex-direction: column !important;
+        p{
+            margin-top: 20px;
+            max-width: 581px;
+            text-align: center;
+            color:var(--color-shining);
+        }
+    }
+    .footer-top{
+        padding: 50px 0;
+    }
+    .footer-bottom{
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        color:var(--color-shining);
+        opacity: 0.3;
+        padding: 17px 0;
+    }
+}

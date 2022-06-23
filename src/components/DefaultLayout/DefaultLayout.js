@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import NavBar from '../NavBar'
 import classNames from 'classnames/bind'
 import styles from '../Header/Header.scss'
+import Footer from '../Footer'
 const cx = classNames.bind(styles)
 
 const propTypes = {
@@ -16,6 +17,7 @@ function DefaultLayout({children}) {
             <NavBar/>
             <div className={cx('stuff')}></div>
             {children}
+            <Footer/>
         </div>
     )
 }
