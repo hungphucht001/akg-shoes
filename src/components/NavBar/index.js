@@ -36,7 +36,7 @@ const NavBar = (props=> {
                     </ul>
                 </div>
                 <div className={cx('logo')}>
-                    <img src="/images/logo.png" alt="logo"/>
+                    <img src="/images/logo-akg.png" alt="logo"/>
                 </div>
                 <div className={cx('menu-right')}>
                     <ul className={cx('nav')}>
