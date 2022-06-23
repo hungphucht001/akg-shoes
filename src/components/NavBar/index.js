@@ -11,6 +11,8 @@ const propTypes = {
 }
 const NavBar = (props=> {
 
+    const {handleClick} = props
+
     const [isScroll, setIsScroll] = useState(false);
 
     useEffect(() => {
@@ -36,7 +38,7 @@ const NavBar = (props=> {
                     </ul>
                 </div>
                 <div className={cx('logo')}>
-                    <img src="/images/logo-akg.png" alt="logo"/>
+                    <Link to='/'><img src="/images/logo-akg.png" alt="logo"/></Link>
                 </div>
                 <div className={cx('menu-right')}>
                     <ul className={cx('nav')}>
@@ -47,7 +49,7 @@ const NavBar = (props=> {
                             <Link to='/wishlist' className={cx('nav-link')}>Wishlist</Link>
                         </li>
                         <li className={cx('menu-item')}>
-                            <Link to='/cart' className={cx('nav-link')}>Cart(0)</Link>
+                            <a onClick={handleClick} className={cx('nav-link')}>Cart(0)</a>
                         </li>
                     </ul>
                 </div>

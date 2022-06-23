@@ -1,10 +1,11 @@
-import React from 'react'
+import React,{useState} from 'react'
 import PropTypes from 'prop-types'
 import NavBar from '../NavBar'
 import {Link} from 'react-router-dom'
 import classNames from 'classnames/bind'
-import styles from './Header.scss'
+import Cart from '../Cart'
 
+import styles from './Header.scss'
 const cx = classNames.bind(styles)
 
 const propTypes = {
@@ -12,12 +13,15 @@ const propTypes = {
 }
 
 function Header(props) {
-
+    const [isShowCart, setIsShowCart] = useState(false);
+    const handleClick = () => {
+        setIsShowCart(!isShowCart)
+    }
 
     return (
         <div className={cx('header')}>
             <div className={cx('wrapper')} style={{backgroundImage: 'url("/images/background-header.png")'}}>   
-                <NavBar/>
+                <NavBar handleClick = {handleClick} />
                 <div className={cx('stuff')}></div>
                 <div className={cx('title')}>
                     <h1>
@@ -41,10 +45,10 @@ function Header(props) {
                         <div>
                             <img src='/images/header-4.png'/>
                         </div>
-                        
                     </div>
                 </div>
             </div>
+            <Cart handleClose={handleClick} show={isShowCart} />
         </div>
     )
 }
