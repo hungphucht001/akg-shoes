@@ -1,0 +1,47 @@
+.header{
+    .wrapper{
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .stuff{
+        height: 140px;
+    }
+    .title{
+        padding: 50px;
+        h1{
+            max-width: 970px;
+            margin: 0 auto;
+            font-family: 'Bebas Neue';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 70px;
+            line-height: 82px;
+            text-align: center;
+            color: #1E1C1A;
+        }
+    }
+    .btn-shop-now{
+        width: 170px;
+        height: 60px;
+        background: #D99655;
+        display: inline-flex;
+        font-family: 'Bebas Neue';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 0.05em;
+        color: #FFFFFF;
+    }
+    .site-box-image{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 150px;
+        img{
+            margin-bottom: -7.5px;
+        }
+    }
+}
