@@ -15,6 +15,7 @@ const propTypes = {
 function Cart(props) {
     
     const {show, handleClose} = props
+   
 
     return (
         <div className={cx('cart-component', show ? 'show':'')}>

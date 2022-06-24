@@ -5,7 +5,7 @@
     z-index: 111111;
     width: 100%;
     top: 0; 
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
     .wrapper{
         margin: 0 83px;
         background-color: var(--color-white);
@@ -14,7 +14,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 41px;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
     }
 
     &.scroll{
@@ -43,15 +43,15 @@
             position: relative;
             margin-left: 40px;
             ::before{
-                content: '';
+                content: "";
                 position: absolute;
-                width: 0px;
+                width: 1px;
                 height: 50px;
                 left: -20px;
                 opacity: 0.2;
                 top: 50%;
+                background-color: #ccc;
                 transform: translateY(-50%);
-                border: 1px solid #1E1C1A;
             }
         }
     }

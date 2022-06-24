@@ -6,13 +6,13 @@ import "swiper/css/scrollbar";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {Scrollbar } from "swiper";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
+
 
 import PropTypes from 'prop-types'
 
 import classNames from 'classnames/bind'
 import styles from './Home.scss'
+import ItemProduct from '~/components/ItemProduct';
 
 const cx = classNames.bind(styles)
 
@@ -115,21 +115,7 @@ function Home(props) {
                                     index = (index +1) < 10 ? `00${index + 1}`: `0${index +1}`
                                     return (
                                         <SwiperSlide key={index}>
-                                            <div className={cx('item')}>
-                                                <h3>
-                                                    {index}
-                                                </h3>
-                                                <img src={item.img} />
-                                                <div className={cx('bottom')}>
-                                                    <div>
-                                                        <h4>{item.title}</h4>
-                                                        <span>$39.00</span>
-                                                    </div>
-                                                    <div className={cx('icon')}>
-                                                        <FontAwesomeIcon icon={faCartPlus} />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <ItemProduct index={index} item= {item} />
                                         </SwiperSlide>
                                     )
                                 }
