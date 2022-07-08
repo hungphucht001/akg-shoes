@@ -4,26 +4,28 @@ import Home from "~/pages/Home";
 import Products from "~/pages/Products";
 import Search from "~/pages/Search";
 
+import routes from '~/config/routes'
+
 const privateRoutes = []
 
 const publicRoutes = [
     {
-        path: '/products',
-        element: Products,
-        layout: DefaultLayout
-    },
-    {
-        path: '/detail',
+        path: routes.products+':slug',
         element: Detail,
         layout: DefaultLayout
     },
     {
-        path: '/search',
+        path: routes.products,
+        element: Products,
+        layout: DefaultLayout
+    },
+    {
+        path: routes.search,
         element: Search,
         layout: null
     },
     {
-        path: '/',
+        path: routes.home,
         element: Home,
         layout: LayoutBanner
     }

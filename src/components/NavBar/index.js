@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import classNames from 'classnames/bind';
 import styles from './NavBar.scss'
+import routes from '~/config/routes'
 
 const cx = classNames.bind(styles);
 
@@ -33,17 +34,17 @@ const NavBar = (props=> {
                             <Link to='/new-in' className={cx('nav-link')}>New In</Link>
                         </li>
                         <li className={cx('menu-item')}>
-                            <Link to='/products' className={cx('nav-link')}>All Products</Link>
+                            <Link to={routes.products} className={cx('nav-link')}>All Products</Link>
                         </li>
                     </ul>
                 </div>
                 <div className={cx('logo')}>
-                    <Link to='/'><img src="/images/logo-akg.png" alt="logo"/></Link>
+                    <Link to={routes.home}><img src="/images/logo-akg.png" alt="logo"/></Link>
                 </div>
                 <div className={cx('menu-right')}>
                     <ul className={cx('nav')}>
                         <li className={cx('menu-item')}>
-                            <Link to='/search' className={cx('nav-link')}>Search</Link>
+                            <Link to={routes.search} className={cx('nav-link')}>Search</Link>
                         </li>
                         <li className={cx('menu-item')}>
                             <Link to='/wishlist' className={cx('nav-link')}>Wishlist</Link>

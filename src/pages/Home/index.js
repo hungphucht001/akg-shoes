@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 
 import "swiper/css";
 import "swiper/css/scrollbar";
@@ -6,47 +6,19 @@ import "swiper/css/scrollbar";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {Scrollbar } from "swiper";
 
-
-
 import PropTypes from 'prop-types'
 
 import classNames from 'classnames/bind'
 import styles from './Home.scss'
 import ItemProduct from '~/components/ItemProduct';
 
+import * as productApi from "~/apiServices/productApi"
+
 const cx = classNames.bind(styles)
 
 const propTypes = {
     
 }
-
-const data = [
-    {
-        title: 'Athletic Shoe',
-        img: '/images/section-201.png'
-    },
-    {
-        title: 'Maroon Wedget',
-        img: '/images/section-202.png'
-    },
-    {
-        title: 'GreenLeather Shoe',
-        img: '/images/section-203.png'
-    },
-    {
-        title: 'Athletic Shoe',
-        img: '/images/section-201.png'
-    },
-    {
-        title: 'Maroon Wedget',
-        img: '/images/section-202.png'
-    },
-    {
-        title: 'GreenLeather Shoe',
-        img: '/images/section-203.png'
-    }
-]
-
 
 const dataBrands = [
     {
@@ -67,6 +39,16 @@ const dataBrands = [
 ]
 
 function Home(props) {
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        const fetchApi = async () =>{
+            const result = await productApi.homeProductApi();
+            setData(result)
+        }
+        fetchApi()
+    }, []);
+
+
     return (
         <div className={cx('home')}>
             <div className={cx('wrapper')}>

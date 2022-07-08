@@ -6,6 +6,8 @@ import Cart from '../Cart'
 
 import classNames from 'classnames/bind'
 import styles from './Header.scss'
+
+import routes from '~/config/routes'
 const cx = classNames.bind(styles)
 
 const propTypes = {
@@ -37,7 +39,7 @@ function Header(props) {
                     </h1>
                 </div>
                 <div className={cx('center')}>
-                    <Link to='/' className={cx('btn-shop-now')}>SHOP NOW</Link>
+                    <Link to={routes.products} className={cx('btn-shop-now')}>SHOP NOW</Link>
                 </div>
                 <div className={cx('container')}>
                     <div className={cx('site-box-image')}>

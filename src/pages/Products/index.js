@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ItemProduct from "~/components/ItemProduct";
 
@@ -8,60 +8,11 @@ import { faAngleDown, faAngleUp, faQ } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Products.scss";
 import classNames from "classnames/bind";
 
+import * as apiProduct from "~/apiServices/productApi"
+
 const cx = classNames.bind(styles);
 
 const propTypes = {};
-
-const data = [
-    {
-        title: "Athletic Shoe",
-        img: "/images/section-201.png",
-    },
-    {
-        title: "Maroon Wedget",
-        img: "/images/section-202.png",
-    },
-    {
-        title: "GreenLeather Shoe",
-        img: "/images/section-203.png",
-    },
-    {
-        title: "Athletic Shoe",
-        img: "/images/section-201.png",
-    },
-    {
-        title: "Maroon Wedget",
-        img: "/images/section-202.png",
-    },
-    {
-        title: "GreenLeather Shoe",
-        img: "/images/section-203.png",
-    },
-    {
-        title: "Athletic Shoe",
-        img: "/images/section-201.png",
-    },
-    {
-        title: "Maroon Wedget",
-        img: "/images/section-202.png",
-    },
-    {
-        title: "GreenLeather Shoe",
-        img: "/images/section-203.png",
-    },
-    {
-        title: "Athletic Shoe",
-        img: "/images/section-201.png",
-    },
-    {
-        title: "Maroon Wedget",
-        img: "/images/section-202.png",
-    },
-    {
-        title: "GreenLeather Shoe",
-        img: "/images/section-203.png",
-    },
-];
 
 const dataSortBy = ["Cũ nhất", "Mới nhất", "Giá: Tăng dần", "Giá: Giảm dần"];
 
@@ -69,6 +20,17 @@ function Products(props) {
     const [isShowSortBy, setIsShowSortBy] = useState(false);
     const [isShowFilter, setIsShowFilter] = useState(true);
     const [sortTitle, setSortTitle] = useState("Sắp xếp theo");
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const getData = async () => {
+            const temp = await apiProduct.allProduct();
+            console.log(temp.length)
+            setData(temp);
+        }
+        getData()
+    }, []);
+
 
     const handleToggleSortBy = () => setIsShowSortBy(!isShowSortBy);
 
@@ -175,10 +137,10 @@ function Products(props) {
                 )}
                 <div className={cx("row")}>
                     {data.map((item, index) => (
-                        <div className={cx("col-3 mb-10")} key={index}>
-                            <ItemProduct item={item} />
-                        </div>
-                    ))}
+                            <div className={cx("col-3 mb-10")} key={index}>
+                                <ItemProduct item={item} />
+                            </div>
+                        ))}
                 </div>
             </div>
         </div>
