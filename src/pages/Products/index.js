@@ -1,42 +1,42 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import ItemProduct from "~/components/ItemProduct";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faAngleUp, faQ } from "@fortawesome/free-solid-svg-icons";
+import ItemProduct from "~/components/ItemProduct";
 
 import styles from "./Products.scss";
 import classNames from "classnames/bind";
 
-import * as apiProduct from "~/apiServices/productApi"
+import * as apiProduct from "~/services/productApi";
+import Filter from "./Filter";
+import Sort from "./Sort";
 
 const cx = classNames.bind(styles);
 
 const propTypes = {};
 
-const dataSortBy = ["Cũ nhất", "Mới nhất", "Giá: Tăng dần", "Giá: Giảm dần"];
-
 function Products(props) {
-    const [isShowSortBy, setIsShowSortBy] = useState(false);
+
     const [isShowFilter, setIsShowFilter] = useState(true);
-    const [sortTitle, setSortTitle] = useState("Sắp xếp theo");
     const [data, setData] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(0);
 
     useEffect(() => {
         const getData = async () => {
-            const temp = await apiProduct.allProduct();
-            console.log(temp.length)
-            setData(temp);
-        }
-        getData()
-    }, []);
+            const temp = await apiProduct.allProduct(page);
+            setData((prev) => {
+                return prev.concat(temp.data);
+            });
+            setTotalPage(temp.pagination._totalPages);
+        };
+        getData();
+    }, [page]);
 
-
-    const handleToggleSortBy = () => setIsShowSortBy(!isShowSortBy);
-
-    const handleSort = (title) => {
-        setSortTitle(title);
-        setIsShowSortBy(false);
+    const fetchMoreData = () => {
+        setTimeout(() => {
+            setPage(page => page + 1);
+        }, 1500);
     };
 
     const handleToggleShowFilter = () => setIsShowFilter(!isShowFilter);
@@ -61,87 +61,24 @@ function Products(props) {
                         <span className={cx("filter-toggle-icon")}></span>
                     </div>
 
-                    <div className={cx("sort")}>
-                        <div
-                            onClick={handleToggleSortBy}
-                            className={cx("sort-title")}
-                        >
-                            <span>{sortTitle}</span>
-                            <div className={cx("icon-sort")}>
-                                {isShowSortBy ? (
-                                    <FontAwesomeIcon icon={faAngleUp} />
-                                ) : (
-                                    <FontAwesomeIcon icon={faAngleDown} />
-                                )}
-                            </div>
-                        </div>
-                        {isShowSortBy && (
-                            <ul className={cx("sort-by")}>
-                                {dataSortBy.map((item, index) => (
-                                    <li
-                                        key={index}
-                                        onClick={() => handleSort(item)}
-                                        className={cx("sortitem-sort-by")}
-                                    >
-                                        <span>{item}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
+                    <Sort />
                 </div>
             </div>
             <div className={cx("product-list")}>
-                {isShowFilter && (
-                    <div className="filter">
-                        <div className="filter-title">
-                            <h4>Filter</h4>
-                        </div>
-                        <div className="filter-item">
-                            <div>
-                                <span>Color</span>
-                                <div className={cx("icon-filter")}>
-                                    {isShowSortBy ? (
-                                        <FontAwesomeIcon icon={faAngleUp} />
-                                    ) : (
-                                        <FontAwesomeIcon icon={faAngleDown} />
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="filter-item">
-                            <div>
-                                <span>Size</span>
-                                <div className={cx("icon-filter")}>
-                                    {isShowSortBy ? (
-                                        <FontAwesomeIcon icon={faAngleUp} />
-                                    ) : (
-                                        <FontAwesomeIcon icon={faAngleDown} />
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="filter-item">
-                            <div>
-                                <span>Price</span>
-                                <div className={cx("icon-filter")}>
-                                    {isShowSortBy ? (
-                                        <FontAwesomeIcon icon={faAngleUp} />
-                                    ) : (
-                                        <FontAwesomeIcon icon={faAngleDown} />
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )}
-                <div className={cx("row")}>
+                {isShowFilter && <Filter/>}
+                <InfiniteScroll
+                    dataLength={data.length}
+                    next={fetchMoreData}
+                    className={cx("row")}
+                    hasMore={data.length < totalPage}
+                    loader={<h4 className={cx("text-center")}>Loading...</h4>}
+                >
                     {data.map((item, index) => (
-                            <div className={cx("col-3 mb-10")} key={index}>
-                                <ItemProduct item={item} />
-                            </div>
-                        ))}
-                </div>
+                        <div className={cx("col-3 mb-10")} key={index}>
+                            <ItemProduct item={item} />
+                        </div>
+                    ))}
+                </InfiniteScroll>
             </div>
         </div>
     );

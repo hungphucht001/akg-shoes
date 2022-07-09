@@ -12,7 +12,7 @@ import classNames from 'classnames/bind'
 import styles from './Home.scss'
 import ItemProduct from '~/components/ItemProduct';
 
-import * as productApi from "~/apiServices/productApi"
+import * as productApi from "~/services/productApi"
 
 const cx = classNames.bind(styles)
 
@@ -43,7 +43,7 @@ function Home(props) {
     useEffect(() => {
         const fetchApi = async () =>{
             const result = await productApi.homeProductApi();
-            setData(result)
+            setData(result.data)
         }
         fetchApi()
     }, []);

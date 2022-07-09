@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import NavBar from '../NavBar'
 import {Link} from 'react-router-dom'
-import Cart from '../Cart'
+import Cart from '../../components/Cart'
 
 import classNames from 'classnames/bind'
 import styles from './Header.scss'

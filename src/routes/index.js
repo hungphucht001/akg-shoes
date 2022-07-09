@@ -1,4 +1,4 @@
-import { DefaultLayout, LayoutBanner } from "~/components/DefaultLayout";
+import { DefaultLayout, LayoutBanner } from "~/layouts/DefaultLayout";
 import Detail from "~/pages/Detail";
 import Home from "~/pages/Home";
 import Products from "~/pages/Products";

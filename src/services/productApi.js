@@ -4,7 +4,8 @@ export const homeProductApi = async()=>{
     try{
         const res = await request.get('/products',{
             params: {
-                limit: 5
+                _limit: 5,
+                s: 1
             }
         })
         return res
@@ -15,9 +16,15 @@ export const homeProductApi = async()=>{
  }
  
 
- export const allProduct = async()=>{
+ export const allProduct = async( _page, _limit = 8)=>{
     try{
-        const res = await request.get('/products')
+        const res = await request.get('/products',{
+            params: {
+                _limit:_limit,
+                _page: _page,
+                s: 1
+            }
+        })
         return res
     }
     catch(error){
