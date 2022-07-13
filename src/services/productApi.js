@@ -16,20 +16,31 @@ export const homeProductApi = async()=>{
  }
  
 
- export const allProduct = async( _page, _limit = 8)=>{
+ export const allProduct = async( pag )=>{
     try{
         const res = await request.get('/products',{
             params: {
-                _limit:_limit,
-                _page: _page,
-                s: 1
+                _limit: 8,
+                _page: pag.page,
+                s: pag.s,
+                col:pag.col,
+                type: pag.type,
             }
         })
         return res
+       
     }
     catch(error){
          console.log(error);
     }
  }
  
-
+ export const product = async(slug)=>{
+    try{
+        const res = await request.get(`/products/${slug}`)
+        return res
+    }
+    catch(error){
+         console.log(error);
+    }
+ }

@@ -6,45 +6,7 @@
         align-items: center;
         padding-bottom: 20px;
         padding: 0 10px 20px 10px;
-        .sort{
-            border: 1px solid #ccc;
-            width: 200px;
-            cursor: pointer;
-            position: relative;
-            user-select: none;
-            .sort-title{
-                display: flex;
-                width: 100%;
-                justify-content: space-between;
-                padding: 10px;
-                .icon-sort{
-                    color: var(--color-dark);
-                }
-            }
-            .sort-by{
-                z-index: 111;
-                position: absolute;
-                top: 101%;
-                width: 101%;
-                left: -1px;
-                border: 1px solid rgba(34, 36, 38, 0.15);
-                border-top-color: rgba(34, 36, 38, 0.15);
-                border-top-style: solid;
-                border-top-width: 1px;
-                border-top: 0;
-                box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-                background-color: white;
-                li{
-                    padding: 10px;
-                    &:hover{
-                        background-color: rgb(238, 238, 238);
-                    }
-                }
-                li + li{
-                    border-top: 1px solid rgb(230, 230, 230);
-                }
-            }
-        }
+      
         .feature{
             display: flex;
             justify-content: center;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -16,11 +16,23 @@ import classNames from "classnames/bind";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
+import * as apiProduct from "~/services/productApi"
+
 const cx = classNames.bind(styles);
 
 const propTypes = {};
 
 function Detail(props) {
+
+    // useEffect(() => {
+    //     const data = async() =>{
+
+    //         const data = await 
+
+    //     }
+
+    // },[])
+
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     return (
         <div className={cx("detail")}>

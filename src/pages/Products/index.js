@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
+import {useSelector, useDispatch} from 'react-redux'
+import {addProduct, addPage} from '~/redux/actions'
 
 import ItemProduct from "~/components/ItemProduct";
 
@@ -9,7 +11,10 @@ import classNames from "classnames/bind";
 
 import * as apiProduct from "~/services/productApi";
 import Filter from "./Filter";
-import Sort from "./Sort";
+
+import { productListSelector} from '~/redux/selectors'
+import SortProduct from "~/components/SortProduct";
+// import { fas } from "@fortawesome/free-solid-svg-icons";
 
 const cx = classNames.bind(styles);
 
@@ -18,24 +23,36 @@ const propTypes = {};
 function Products(props) {
 
     const [isShowFilter, setIsShowFilter] = useState(true);
-    const [data, setData] = useState([]);
-    const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState(0);
+    
+    const dispatch = useDispatch()
+    const products = useSelector(productListSelector)
+    
+    const data = products.data
+    const pag = products.pag
 
     useEffect(() => {
         const getData = async () => {
-            const temp = await apiProduct.allProduct(page);
-            setData((prev) => {
-                return prev.concat(temp.data);
-            });
-            setTotalPage(temp.pagination._totalPages);
+            if(pag.page > 0){
+                const temp = await apiProduct.allProduct(pag);
+                dispatch(addProduct(temp.data))
+                setTotalPage(temp.pagination._totalPages);
+            }
+            else dispatch(addPage({
+                ...pag,
+                page: 1
+            }))
         };
         getData();
-    }, [page]);
+       
+    }, [dispatch, pag]);
 
     const fetchMoreData = () => {
         setTimeout(() => {
-            setPage(page => page + 1);
+            dispatch(addPage({
+                ...pag,
+                page: pag.page + 1,
+            }))
         }, 1500);
     };
 
@@ -61,12 +78,13 @@ function Products(props) {
                         <span className={cx("filter-toggle-icon")}></span>
                     </div>
 
-                    <Sort />
+                    <SortProduct />
                 </div>
             </div>
             <div className={cx("product-list")}>
                 {isShowFilter && <Filter/>}
-                <InfiniteScroll
+                {
+                    data && <InfiniteScroll
                     dataLength={data.length}
                     next={fetchMoreData}
                     className={cx("row")}
@@ -79,6 +97,7 @@ function Products(props) {
                         </div>
                     ))}
                 </InfiniteScroll>
+                }
             </div>
         </div>
     );
