@@ -5,8 +5,8 @@ import { faAngleDown, faAngleUp, faQ } from "@fortawesome/free-solid-svg-icons";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { sortProduct } from "~/redux/actions";
-import { productListSelector} from "~/redux/selectors"
+import { sortProduct, emptyProduct } from "~/redux/actions";
+import { sortProductSelector} from "~/redux/selectors"
 
 import classNames from "classnames/bind";
 import styles from "./SortProduct.scss";
@@ -22,6 +22,8 @@ function SortProduct(props) {
 
     const dispatch = useDispatch();
 
+    const pag = useSelector(sortProductSelector)
+
     const handleToggleSortBy = () => setIsShowSortBy(!isShowSortBy);
 
     const handleSort = (title) => {
@@ -29,7 +31,7 @@ function SortProduct(props) {
             case "Cũ nhất": {
                 dispatch(
                     sortProduct({
-                        s: 1,
+                        ...pag,
                         page: 1,
                         type: "asc",
                         col: "id",
@@ -41,7 +43,7 @@ function SortProduct(props) {
             case "Mới nhất": {
                 dispatch(
                     sortProduct({
-                        s: 1,
+                        ...pag,
                         page: 1,
                         type: "desc",
                         col: "id",
@@ -52,7 +54,7 @@ function SortProduct(props) {
             case "Giá: Tăng dần": {
                 dispatch(
                     sortProduct({
-                        s: 1,
+                        ...pag,
                         page: 1,
                         type: "asc",
                         col: "price",
@@ -63,9 +65,9 @@ function SortProduct(props) {
             case "Giá: Giảm dần": {
                 dispatch(
                     sortProduct({
-                        s: 1,
+                        ...pag,
                         page: 1,
-                        type: "asc",
+                        type: "desc",
                         col: "price",
                     })
                 );
@@ -74,7 +76,7 @@ function SortProduct(props) {
             default: {
                 dispatch(
                     sortProduct({
-                        s: 1,
+                        ...pag,
                         page: 1,
                         type: "asc",
                         col: "id",
@@ -82,7 +84,9 @@ function SortProduct(props) {
                 );
                 break;
             }
+
         }
+        dispatch(emptyProduct())
         setSortTitle(title);
         setIsShowSortBy(false);
     };

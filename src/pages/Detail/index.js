@@ -1,13 +1,7 @@
 import React, { useState, useEffect} from "react";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
-
-import { FreeMode, Navigation, Thumbs } from "swiper";
+import { useLocation } from 'react-router-dom'
+import NumberFormat from "react-number-format";
 
 import PropTypes from "prop-types";
 
@@ -23,72 +17,43 @@ const cx = classNames.bind(styles);
 const propTypes = {};
 
 function Detail(props) {
+    
+    const [data, setData] = useState({});
+    const [isEmpty, setIsEmpty] = useState(false)
+    const location = useLocation()
+    
+    useEffect(()=>{
+        const slug = location.pathname.split('/')[2]
+        const getData = async()=>{
+            const result = await apiProduct.product(slug);
+            if(!result) setIsEmpty(true)
+            else setData(result)
+            window.screenTop(0)
+        }
+        getData()
 
-    // useEffect(() => {
-    //     const data = async() =>{
+    }, [location])
 
-    //         const data = await 
-
-    //     }
-
-    // },[])
-
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
     return (
         <div className={cx("detail")}>
             <div className={cx("container")}>
-                <div className={cx("row")}>
+                {data.price && <div className={cx("row")}>
                     <div className={cx("col-5")}>
-                    <Swiper
-                            style={{
-                                "--swiper-navigation-color": "#fff",
-                                "--swiper-pagination-color": "#fff",
-                            }}
-                            loop={true}
-                            spaceBetween={10}
-                            navigation={true}
-                            thumbs={{ swiper: thumbsSwiper }}
-                            modules={[FreeMode, Navigation, Thumbs]}
-                            className="mySwiper2"
-                        >
-                            <SwiperSlide>
-                                <img src="/images/section-201.png" alt=""/>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <img src="/images/section-202.png" alt=""/>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <img src="/images/section-203.png" alt=""/>
-                            </SwiperSlide>
-                        </Swiper>
-                        <Swiper
-                            //onSwiper={setThumbsSwiper}
-                            loop={true}
-                            spaceBetween={10}
-                            slidesPerView={4}
-                            freeMode={true}
-                            watchSlidesProgress={true}
-                            modules={[FreeMode, Navigation, Thumbs]}
-                            className="mySwiper"
-                        >
-                            <SwiperSlide>
-                                <img src="/images/section-201.png" alt=""/>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <img src="/images/section-202.png" alt=""/>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <img src="/images/section-203.png" alt=""/>
-                            </SwiperSlide>
-                        </Swiper>
+                        <img src={data.avatar} alt=""/>
                     </div>
                     <div className={cx("col-7")}>
                         <div className={cx("wrap-content")}>
                             <div className={cx('name')}>
-                                <h2>Copa Sense.3 Firm Ground Boots</h2>
+                                <h2>{data.name}</h2>
                             </div>
                             <div className={cx("price")}>
-                                <span className={cx("sale")}>1,900,000 đ</span>
+                                <span className={cx("sale")}>
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    displayType={"text"}
+                                    value={data.price.replace('.00',"")}
+                                />
+                            đ</span>
                                 <span>1,140,000 đ</span>
                             </div>
                             <div className={cx('sizes')}>
@@ -110,7 +75,8 @@ function Detail(props) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>}
+                {isEmpty && <p>Sản phẩm không tồn tại</p>}
             </div>
         </div>
     );

@@ -11,6 +11,15 @@ export const sortProduct = (pag)=>{
         payload: pag
     }
 }
+
+export const emptyProduct = ()=>{
+
+    return {
+        type: 'productList/emptyProduct'
+    }
+
+}
+
 export const addPage = (pag)=>{
     return {
         type: 'productList/addPage',

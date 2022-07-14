@@ -1,0 +1,21 @@
+.search-container{
+    .search-header{
+        max-width: 800px;
+        background-color: rgb(233, 233, 233);
+        margin: 0 auto;
+        .search-inner{
+            display: flex;
+            .search-form{
+                width: 100%;
+                padding: 10px 20px;
+                .search-input{
+                    width: 100%;
+                    height: 100%;
+                    background-color: transparent;
+                    outline: none;
+                    border: none;
+                }
+            }
+        }
+    }
+}

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames/bind';
 import styles from './NavBar.scss'
 import routes from '~/config/routes'
+import Cart from '../../components/Cart'
 
 const cx = classNames.bind(styles);
 
@@ -11,16 +12,21 @@ const propTypes = {
     
 }
 const NavBar = (props=> {
-
-    const {handleClick} = props
-
+    const [isShowCart, setIsShowCart] = useState(false);
     const [isScroll, setIsScroll] = useState(false);
 
+    const handleClick = () => {
+        setIsShowCart(!isShowCart)
+    }
+
     useEffect(() => {
-        const handlerScroll = ()=> setIsScroll(window.scrollY >= 20)
-        window.addEventListener('scroll', handlerScroll)
-        return () => window.removeEventListener('scroll', handlerScroll)
-    },[]);
+        const handleScroll = () =>{
+            setIsShowCart(false)
+            setIsScroll(window.scrollY >= 20)
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, []);
 
     return (
         <div className={cx('nav-bar', isScroll? 'scroll':'')}>
@@ -55,6 +61,7 @@ const NavBar = (props=> {
                     </ul>
                 </div>
             </div>
+            <Cart handleClose={handleClick} show={isShowCart} />
         </div>
     )
 

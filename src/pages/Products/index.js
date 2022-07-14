@@ -10,11 +10,11 @@ import styles from "./Products.scss";
 import classNames from "classnames/bind";
 
 import * as apiProduct from "~/services/productApi";
-import Filter from "./Filter";
+import SideBar from "~/components/SideBar";
 
-import { productListSelector} from '~/redux/selectors'
+import { productListSelector, sortProductSelector} from '~/redux/selectors'
 import SortProduct from "~/components/SortProduct";
-// import { fas } from "@fortawesome/free-solid-svg-icons";
+import Loading from "~/components/Loading";
 
 const cx = classNames.bind(styles);
 
@@ -26,11 +26,10 @@ function Products(props) {
     const [totalPage, setTotalPage] = useState(0);
     
     const dispatch = useDispatch()
-    const products = useSelector(productListSelector)
     
-    const data = products.data
-    const pag = products.pag
-
+    const data = useSelector(productListSelector)
+    const pag = useSelector(sortProductSelector)
+    
     useEffect(() => {
         const getData = async () => {
             if(pag.page > 0){
@@ -82,14 +81,14 @@ function Products(props) {
                 </div>
             </div>
             <div className={cx("product-list")}>
-                {isShowFilter && <Filter/>}
+                {isShowFilter && <SideBar/>}
                 {
                     data && <InfiniteScroll
                     dataLength={data.length}
                     next={fetchMoreData}
                     className={cx("row")}
                     hasMore={data.length < totalPage}
-                    loader={<h4 className={cx("text-center")}>Loading...</h4>}
+                    loader={<Loading/>}
                 >
                     {data.map((item, index) => (
                         <div className={cx("col-3 mb-10")} key={index}>
