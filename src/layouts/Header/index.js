@@ -16,12 +16,9 @@ const propTypes = {
 
 function Header(props) {
    
-
-    
-
     return (
         <div className={cx('header')}>
-            <div className={cx('wrapper')} style={{backgroundImage: 'url("/images/background-header.png")'}}>   
+            <div className={cx('wrapper')} style={{backgroundImage: 'url("/images/background.jpg")'}}>   
                 <NavBar/>
                 <div className={cx('stuff')}></div>
                 <div className={cx('title')}>

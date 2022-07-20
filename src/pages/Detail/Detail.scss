@@ -2,13 +2,21 @@
     margin-top: 50px;
     margin-bottom: 60px;
     .amount{
+        margin-block: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         .btn{
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             justify-content: center;
             align-items: center;
             display: inline-flex;
-            background-color: aqua;
+            background-color: rgb(15, 15, 15);
+            color: #fff;
+            cursor: pointer;
+        }
+        .number{
         }
     }
 }

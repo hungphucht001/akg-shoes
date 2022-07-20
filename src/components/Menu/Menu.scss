@@ -1,0 +1,83 @@
+.wrapper-menu{
+    margin: 0 83px;
+    background-color:rgb(255, 255, 255);
+    height: 100px !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 41px;
+    transition: all 0.2s ease;
+    
+    .menu-item{
+        font-family: 'Plus Jakarta Sans';
+        font-weight: 600;
+        font-size: 16px;
+        a{
+            cursor: pointer;
+            color: #1E1C1A;
+        }
+        
+    }
+    &.menu-desktop{
+        .nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;    
+        }
+       .menu-item + .menu-item{
+            position: relative;
+            margin-left: 40px;
+            ::before{
+                content: "";
+                position: absolute;
+                width: 1px;
+                height: 50px;
+                left: -20px;
+                opacity: 0.2;
+                top: 50%;
+                background-color: #ccc;
+                transform: translateY(-50%);
+            }
+        }
+    }
+    &.menu-mobile{
+        .toggle-menu .icon-bars{
+            font-size: 20px;
+        }
+        .menu{
+            // position: relative;
+            .menu-content{
+                position: absolute;
+                height: 100vh;
+                width: 80%;
+                background-color: #ccc;
+                top: 0;
+                right: 0;
+                display: none;
+                overflow-y: scroll;
+                padding: 20px;
+                .menu-header{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-bottom: 1px solid #fff;
+                    padding-bottom: 15px;
+                }
+                .menu-item{
+                    padding: 10px 0;
+                }
+            }
+            .menu-content.show{
+                display: block;
+                transition: all .3s ease;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 426px) {
+    .wrapper-menu{
+        margin: 0 23px;
+        padding: 0 41px;
+    }
+}

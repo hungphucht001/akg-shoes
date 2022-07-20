@@ -3,6 +3,8 @@
     height: 100vh;
     background-color: white;
     position: fixed;
+    display: flex;
+    flex-direction: column;
     top: 0;
     z-index: 111111111;
     transition: all .3s ease;
@@ -31,4 +33,36 @@
             padding: 7px 15px;
         }
     }
+    .cart-content{
+        flex: 1;
+        overflow-y: scroll;
+        height: 100px;
+    }
+    .cart-footer{
+        border-top:1px solid #ccc;
+        padding: 15px 10px;
+        .wrap-total{
+            margin-bottom: 20px;
+        }
+        .total-title{
+            font-weight: 600;
+        }
+
+        .total-price{
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        .wrap-btn{
+            display: flex;
+            button{
+                flex: 1;
+                margin-inline: 10px;
+                background-color: var(--color-primary);
+                font-size: 16px;
+                font-weight: 550;
+                color: var(--color-white);
+            }
+        }
+    }
 }
+

@@ -24,9 +24,10 @@ function Products(props) {
 
     const [isShowFilter, setIsShowFilter] = useState(true);
     const [totalPage, setTotalPage] = useState(0);
+    const [page, setPage] = useState(0);
     
+    //using redux
     const dispatch = useDispatch()
-    
     const data = useSelector(productListSelector)
     const pag = useSelector(sortProductSelector)
     

@@ -38,10 +38,10 @@ function Detail(props) {
         <div className={cx("detail")}>
             <div className={cx("container")}>
                 {data.price && <div className={cx("row")}>
-                    <div className={cx("col-5")}>
+                    <div className={cx("col-6")}>
                         <img src={data.avatar} alt=""/>
                     </div>
-                    <div className={cx("col-7")}>
+                    <div className={cx("col-6")}>
                         <div className={cx("wrap-content")}>
                             <div className={cx('name')}>
                                 <h2>{data.name}</h2>
@@ -56,12 +56,12 @@ function Detail(props) {
                             đ</span>
                                 <span>1,140,000 đ</span>
                             </div>
-                            <div className={cx('sizes')}>
+                            {/* <div className={cx('sizes')}>
                                 <h4>Available sizes</h4>
                                 <div className={cx('list-size')}>
-                                    {/* list size */}
+                                    list size
                                 </div>
-                            </div>
+                            </div> */}
                             <div className={cx('amount')}>
                                 <span className={cx('btn decrease')}>
                                     <FontAwesomeIcon icon={faMinus} />
@@ -72,6 +72,11 @@ function Detail(props) {
                                 <span className={cx('btn increase')}>
                                     <FontAwesomeIcon icon={faPlus} />
                                 </span>
+                            </div>
+                            <div className={cx('btn btn-add')}>
+                                <button className={cx('btn btn-add')} >
+                                    Add to cart
+                                </button>
                             </div>
                         </div>
                     </div>

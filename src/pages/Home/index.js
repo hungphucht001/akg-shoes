@@ -62,12 +62,12 @@ function Home(props) {
                         </p>
                     </div>
                     <div className={cx('row')}>
-                        <div className={cx('item')}>
-                            <img src='/images/section-1.png' />
+                        <div className={cx('item col-6')}>
+                            <img src='/images/formen.jpg' />
                             <h1>_For Men</h1>
                         </div>
-                        <div className={cx('item')}>
-                            <img src='/images/section-2.png'/>
+                        <div className={cx('item col-6')}>
+                            <img src='/images/forwomen.jpg'/>
                             <h1>_For Women</h1>
                         </div>
                     </div>
