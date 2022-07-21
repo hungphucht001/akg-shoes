@@ -73,7 +73,7 @@ function Home(props) {
                     </div>
                 </div>
                 <hr/>
-                <div className={cx('section container mt-100')}>
+                <div className={cx('section container container-news mt-100')}>
                     <div className={cx('title')}>
                         <h1>
                             2022 New Arrivals
@@ -83,12 +83,26 @@ function Home(props) {
                         </p>
                     </div>
                     <Swiper
-                    slidesPerView={4}
-                    spaceBetween={25}
+                    slidesPerView={1}
+                    spaceBetween={20}
                         scrollbar={{
                             hide: true,
                         }}
                         modules={[Scrollbar]}
+                        breakpoints={{
+                            425: {
+                              slidesPerView: 1,
+                            },
+                            768: {
+                              slidesPerView: 2,
+                            },
+                            1024: {
+                              slidesPerView: 3,
+                            },
+                            1440: {
+                                slidesPerView: 4,
+                              },
+                          }}
                         className="mySwiper"
                     >
                         {
@@ -148,12 +162,26 @@ function Home(props) {
                         </p>
                     </div>
                     <Swiper
-                    slidesPerView={5}
-                    spaceBetween={25}
+                    slidesPerView={1}
+                    spaceBetween={10}
                         scrollbar={{
                             hide: true,
                         }}
-                        modules={[Scrollbar]}
+                    modules={[Scrollbar]}
+                    breakpoints={{
+                        425: {
+                            slidesPerView: 2,
+                        },
+                        768: {
+                            slidesPerView: 3,
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                        },
+                        1440: {
+                            slidesPerView: 5,
+                            },
+                        }}
                         className="mySwiper"
                     >
                         {

@@ -40,20 +40,22 @@ ul{
 }
 .container{
     margin: 0 auto;
-    max-width: 1170px;
+    max-width: calc(1170px + 80px);
+    padding-inline: 40px;
 }
 .container-fluid{
-    width: 95%;
+    width: 100%;
     max-width: 1900px;
     margin: 0 auto;
+    padding-inline: 20px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 426px) {
     .container{
-       padding-inline: 40px;
+        padding-inline: 20px;
     }
     .container-fluid{
-        padding-inline: 20px;
+        padding-inline: 10px;
     }
 }
 

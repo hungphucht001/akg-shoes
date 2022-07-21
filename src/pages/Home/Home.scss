@@ -135,6 +135,21 @@
                     }
                 }
             }
+            &.container-news{
+                margin-top: 40px !important;
+            }
+            .mySwiper{
+                margin-top: 40px;
+                .item{
+                    padding-bottom: 20px;
+                }
+            }
+            &.offer{
+                padding-bottom: 50px;
+                .site-box-image{
+                    display: none;
+                }
+            }
         }
     }
 }
