@@ -110,3 +110,31 @@
         }
     }
 }
+
+@media only screen and (max-width: 769px) {
+    .home{
+        margin-top: 80px;
+        .section {
+            // padding-bottom: 30px;
+        }
+    }
+}
+
+@media only screen and (max-width: 426px) {
+    .home{
+        margin-top: 80px;
+        .section {
+            .row{
+                margin-top: 40px;
+                flex-direction: column;
+                .item{
+                    width: 100%;
+                    padding: 0 !important;
+                    &:nth-child(2){
+                        margin-top: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

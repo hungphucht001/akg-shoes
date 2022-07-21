@@ -49,8 +49,8 @@
             .menu-content{
                 position: absolute;
                 height: 100vh;
-                width: 80%;
                 background-color: #ccc;
+                // width: 80%;
                 top: 0;
                 right: 0;
                 display: none;
@@ -75,9 +75,20 @@
     }
 }
 
+@media only screen and (max-width: 769px) {
+    .wrapper-menu{
+        margin: 0 34px;
+        padding: 0 41px;
+    }
+    .menu-content{
+        width: 40% !important;
+    }
+}
 @media only screen and (max-width: 426px) {
     .wrapper-menu{
         margin: 0 23px;
-        padding: 0 41px;
+    }
+    .menu-content{
+        width: 80% !important;
     }
 }

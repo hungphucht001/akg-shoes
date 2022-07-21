@@ -45,3 +45,19 @@
         }
     }
 }
+
+@media only screen and(max-width: 426px) {
+    .header{
+        .title{
+            h1{
+                font-size: 45px;
+            }
+        }
+        .container{
+            display: none;
+        }
+        .center{
+            padding-bottom: 100px;
+        }
+    }
+}
