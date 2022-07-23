@@ -1,21 +1,26 @@
-FROM node:16.15.1
-#also say 
-WORKDIR /app
-#copy the react app to the container
-COPY . .
-
-# #prepare the contiainer for building react 
-RUN npm install --silent
-#RUN npm install react-scripts@3.0.1 -g --silent 
-RUN npm run build 
-
-#prepare nginx
-FROM nginx:1.18.0
-
-COPY --from=build /app/build /var/www/html
-#RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx/nginx.conf /etc/nginx/conf.d
-
-#fire up nginx
-EXPOSE 80 
-CMD ["nginx","-g","daemon off;"]
+ # 1. For build React app
+    FROM node:lts AS development
+    # Set working directory
+    WORKDIR /app
+    #
+    COPY package.json /app/package.json
+    COPY package-lock.json /app/package-lock.json
+    # Same as npm install
+    RUN npm ci
+    COPY . /app
+    ENV CI=true
+    ENV PORT=3000
+    CMD [ "npm", "start" ]
+    FROM development AS build
+    RUN CI='' npm run build
+    # 2. For Nginx setup
+    FROM nginx:alpine
+    # Copy config nginx
+    COPY --from=build /app/.nginx/nginx.conf /etc/nginx/conf.d/default.conf
+    WORKDIR /usr/share/nginx/html
+    # Remove default nginx static assets
+    RUN rm -rf ./*
+    # Copy static assets from builder stage
+    COPY --from=build /app/build .
+    # Containers run nginx with global directives and daemon off
+    ENTRYPOINT ["nginx", "-g", "daemon off;"]
