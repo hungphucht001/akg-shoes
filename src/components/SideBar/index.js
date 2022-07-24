@@ -1,100 +1,86 @@
-import React, { useState, memo } from "react";
-import PropTypes from "prop-types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faAngleUp, faQ } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, memo } from 'react';
+import NumberFormat from "react-number-format";
 
 //redux
+import { useDispatch, useSelector } from 'react-redux';
+import { sortProduct, emptyProduct } from '~/redux/actions';
+import { sortProductSelector } from '~/redux/selectors';
 
-import { useDispatch, useSelector } from 'react-redux'
-import {sortProduct, emptyProduct} from '~/redux/actions'
-import {sortProductSelector} from '~/redux/selectors'
-
-
-import classNames from "classnames/bind";
-import styles from "./SideBar.scss";
-const cx = classNames.bind(styles);
+import classNames from 'classnames/bind';
+import styles from './SideBar.scss';
+import { Radio, Slider } from 'antd';
 
 const propTypes = {};
 
 function SideBar(props) {
-    const [isShowSortBy, setIsShowSortBy] = useState(false);
-    const [checked, setChecked] = useState("men");
+    const [value, setValue] = useState('men');
+    const [inputValuePrice, setInputValuePrice] = useState([50000, 5000000]);
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const pag = useSelector(sortProductSelector);
 
-    const pag = useSelector(sortProductSelector)
+    const onChangePrice = (newValue) => {
+        setInputValuePrice(newValue);
+    };
 
-    const handleCheck = (val) => {
-        dispatch(sortProduct({
-            ...pag,
-            s: val === 'women'? 2: 1     
-        }));
-        dispatch(emptyProduct())
-        setChecked(val);
+    const formatter = (value) => {
+        return `${value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').replace('.00', '')} đ`;
+    };
+
+    const onChange = (e) => {
+        const val = e.target.value;
+        setValue(val);
+        dispatch(emptyProduct());
+
+        setTimeout(() => {
+            dispatch(
+                sortProduct({
+                    ...pag,
+                    s: val === 'women' ? 2 : 1,
+                }),
+            );
+        }, 1000);
     };
 
     return (
         <div className="filter">
-            <div className="filter-title">
+            <div className="filter-title mb-10">
                 <h4>Category</h4>
             </div>
+            <Radio.Group className='radio-group' onChange={onChange} value={value}>
+                <Radio value={'women'}>Women's shoes</Radio>
+                <Radio value={'men'}>Men's shoes</Radio>
+            </Radio.Group>
+            <div className="filter-title mt-20 mb-10">
+                <h4>Price</h4>
+            </div>
             <div>
-                <div>
-                    <input
-                        id="men"
-                        checked={checked === "men"}
-                        onChange={() => handleCheck("men")}
-                        type="radio"
-                    />
-                    <label for="men">Men's shoes</label>
-                </div>
-                <div>
-                    <input
-                        id="women"
-                        checked={checked === "women"}
-                        onChange={() => handleCheck("women")}
-                        type="radio"
-                    />
-                    <label for="women">Women's shoes</label>
-                </div>
-            </div>
-            <div className="filter-title">
-                <h4>Filter</h4>
-            </div>
-            <div className="filter-item">
-                <div>
-                    <span>Color</span>
-                    <div className={cx("icon-filter")}>
-                        {isShowSortBy ? (
-                            <FontAwesomeIcon icon={faAngleUp} />
-                        ) : (
-                            <FontAwesomeIcon icon={faAngleDown} />
-                        )}
-                    </div>
-                </div>
-            </div>
-            <div className="filter-item">
-                <div>
-                    <span>Size</span>
-                    <div className={cx("icon-filter")}>
-                        {isShowSortBy ? (
-                            <FontAwesomeIcon icon={faAngleUp} />
-                        ) : (
-                            <FontAwesomeIcon icon={faAngleDown} />
-                        )}
-                    </div>
-                </div>
-            </div>
-            <div className="filter-item">
-                <div>
-                    <span>Price</span>
-                    <div className={cx("icon-filter")}>
-                        {isShowSortBy ? (
-                            <FontAwesomeIcon icon={faAngleUp} />
-                        ) : (
-                            <FontAwesomeIcon icon={faAngleDown} />
-                        )}
-                    </div>
+                <Slider
+                    onChange={onChangePrice}
+                    tipFormatter={formatter}
+                    min={50000}
+                    max={5000000}
+                    range
+                    defaultValue={inputValuePrice}
+                />
+                <div className='limit_price'>
+                    <span>
+                        <NumberFormat
+                            thousandSeparator={true}
+                            displayType={"text"}
+                            value={inputValuePrice[0]}
+                        />
+                        đ
+                    </span>
+                    <span className='space'>-</span>
+                    <span>
+                        <NumberFormat
+                            thousandSeparator={true}
+                            displayType={"text"}
+                            value={inputValuePrice[1]}
+                        />
+                        đ
+                    </span>
                 </div>
             </div>
         </div>

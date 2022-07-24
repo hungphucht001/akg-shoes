@@ -6,6 +6,7 @@ import styles from './NavBar.scss'
 import routes from '~/config/routes'
 import Cart from '../../components/Cart'
 import { Menu, MenuMobile } from '~/components/Menu';
+import Search from '~/components/Search';
 
 const cx = classNames.bind(styles);
 
@@ -13,20 +14,17 @@ const propTypes = {
 
 }
 const NavBar = (props => {
-    const [isShowCart, setIsShowCart] = useState(false);
-    const [isScroll, setIsScroll] = useState(false);
-    const [menu, setMenu] = useState(
-        window.innerWidth > 768 ?<Menu />: <MenuMobile/>
-    );
 
-    const handleClick = useCallback(() => {
-        setIsShowCart(!isShowCart)
-    }, [isShowCart])
+    const [isShowSearch, setIsShowSearch] = useState(false);
+    const [isScroll, setIsScroll] = useState(false);
+
+    const [menu, setMenu] = useState(
+        window.innerWidth > 768 ? <Menu /> : <MenuMobile />
+    );
 
     useEffect(() => {
         setIsScroll(window.scrollY >= 20)
         const handleScroll = () => {
-            // setIsShowCart(false)
             setIsScroll(window.scrollY >= 20)
         }
         window.addEventListener('scroll', handleScroll)
@@ -46,7 +44,8 @@ const NavBar = (props => {
     return (
         <div className={cx('nav-bar', isScroll ? 'scroll' : '')}>
             {menu}
-            <Cart onClose={handleClick} show={isShowCart} />
+            <Cart />
+            {isShowSearch && <Search />}
         </div>
     )
 });

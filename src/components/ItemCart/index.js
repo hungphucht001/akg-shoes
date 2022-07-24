@@ -1,4 +1,4 @@
-import React, {useState, memo} from 'react'
+import React, { useState, memo } from 'react'
 import PropTypes from 'prop-types'
 import styles from './ItemCart.scss'
 import classNames from 'classnames/bind'
@@ -8,16 +8,16 @@ import { faRemove, faAdd, faMinus } from '@fortawesome/free-solid-svg-icons'
 const cx = classNames.bind(styles)
 
 const propTypes = {
-    
+
 }
 
 function ItemCart(props) {
 
     const [quanlity, setquanlity] = useState(3);
 
-    const handleMinus = () =>{
+    const handleMinus = () => {
         setquanlity(prev => {
-            if(prev === 1){
+            if (prev === 1) {
                 console.log('xóa nha');
                 return 1;
             }
@@ -25,12 +25,12 @@ function ItemCart(props) {
             return prev - 1;
         })
     }
-    const handlePlus = () =>{
+    const handlePlus = () => {
         setquanlity(prev => {
             return prev + 1;
         })
     }
-    const handleRemove = () =>{
+    const handleRemove = () => {
         //dispatch action remove in store cart
     }
     return (
@@ -40,11 +40,11 @@ function ItemCart(props) {
             </div>
             <div className={cx('item-content')}>
                 <h4 className={cx('item-title')}>
-                    Giày Converse Run Star Giày Converse Run Star 
+                    Giày Converse Run Star Giày Converse Run Star
                 </h4>
                 <div className={cx('item-price')}>
                     <span>
-                    {quanlity} x 100.000.000đ
+                        {quanlity} x 100.000.000đ
                     </span>
                 </div>
                 <div className={cx('item-quanlity')}>

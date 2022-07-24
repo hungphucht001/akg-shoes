@@ -1,20 +1,38 @@
-import React, { memo } from 'react'
-import {Link} from 'react-router-dom'
+import React, { memo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import routes from '~/config/routes'
 
 import PropTypes from 'prop-types'
 import classNames from 'classnames/bind';
 import styles from './Menu.scss'
+import Search from '../Search';
 const cx = classNames.bind(styles);
+
+import { useDispatch } from 'react-redux';
+import { toggleCartComponent } from '~/redux/actions'
+import { Modal } from 'antd';
+
 const propTypes = {
-    
+
 }
 
 function Menu(props) {
 
-    const handleClick = () =>{
+    const dispatch = useDispatch()
 
-    }
+    const handleShowCartComponent = () => {
+        dispatch(toggleCartComponent(true))
+    };
+
+    const [visibleModelSearch, setVisibleModelSearch] = useState(false);
+
+    const showModal = () => {
+        setVisibleModelSearch(true);
+    };
+
+    const handleCancel = () => {
+        setVisibleModelSearch(false);
+    };
 
     return (
         <div className={cx('wrapper wrapper-menu menu-desktop')}>
@@ -32,22 +50,33 @@ function Menu(props) {
                 </ul>
             </div>
             <div className={cx('logo')}>
-                <Link to={routes.home}><img src="/images/logo-akg.png" alt="logo"/></Link>
+                <Link to={routes.home}><img src="/images/logo-akg.png" alt="logo" /></Link>
             </div>
             <div className={cx('menu-right')}>
                 <ul className={cx('nav')}>
                     <li className={cx('menu-item')}>
-                        <Link to={routes.search} className={cx('nav-link')}>Search</Link>
+                        <a onClick={showModal} className={cx('nav-link')}>Search</a>
                     </li>
                     <li className={cx('menu-item')}>
                         <Link to='/wishlist' className={cx('nav-link')}>Wishlist</Link>
                     </li>
                     <li className={cx('menu-item')}>
-                        <a onClick={handleClick} className={cx('nav-link')}>Cart(0)</a>
+                        <a onClick={handleShowCartComponent} className={cx('nav-link')}>Cart(0)</a>
                     </li>
                 </ul>
+                <Modal
+                    visible={visibleModelSearch}
+                    width={1000}
+                    closable={false}
+                    onCancel={handleCancel}
+                    footer={null}
+                >
+                    <Search />
+                </Modal>
             </div>
         </div>
+
+
     )
 }
 

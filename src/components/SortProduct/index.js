@@ -6,7 +6,7 @@ import { faAngleDown, faAngleUp, faQ } from "@fortawesome/free-solid-svg-icons";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { sortProduct, emptyProduct } from "~/redux/actions";
-import { sortProductSelector} from "~/redux/selectors"
+import { sortProductSelector } from "~/redux/selectors"
 
 import classNames from "classnames/bind";
 import styles from "./SortProduct.scss";
@@ -27,66 +27,71 @@ function SortProduct(props) {
     const handleToggleSortBy = () => setIsShowSortBy(!isShowSortBy);
 
     const handleSort = (title) => {
-        switch (title) {
-            case "Cũ nhất": {
-                dispatch(
-                    sortProduct({
-                        ...pag,
-                        page: 1,
-                        type: "asc",
-                        col: "id",
-                    })
-                );
-                break;
-            }
 
-            case "Mới nhất": {
-                dispatch(
-                    sortProduct({
-                        ...pag,
-                        page: 1,
-                        type: "desc",
-                        col: "id",
-                    })
-                );
-                break;
-            }
-            case "Giá: Tăng dần": {
-                dispatch(
-                    sortProduct({
-                        ...pag,
-                        page: 1,
-                        type: "asc",
-                        col: "price",
-                    })
-                );
-                break;
-            }
-            case "Giá: Giảm dần": {
-                dispatch(
-                    sortProduct({
-                        ...pag,
-                        page: 1,
-                        type: "desc",
-                        col: "price",
-                    })
-                );
-                break;
-            }
-            default: {
-                dispatch(
-                    sortProduct({
-                        ...pag,
-                        page: 1,
-                        type: "asc",
-                        col: "id",
-                    })
-                );
-                break;
-            }
-
-        }
         dispatch(emptyProduct())
+
+        setTimeout(() => {
+            switch (title) {
+                case "Cũ nhất": {
+                    dispatch(
+                        sortProduct({
+                            ...pag,
+                            page: 1,
+                            type: "asc",
+                            col: "id",
+                        })
+                    );
+                    break;
+                }
+
+                case "Mới nhất": {
+                    dispatch(
+                        sortProduct({
+                            ...pag,
+                            page: 1,
+                            type: "desc",
+                            col: "id",
+                        })
+                    );
+                    break;
+                }
+                case "Giá: Tăng dần": {
+                    dispatch(
+                        sortProduct({
+                            ...pag,
+                            page: 1,
+                            type: "asc",
+                            col: "price",
+                        })
+                    );
+                    break;
+                }
+                case "Giá: Giảm dần": {
+                    dispatch(
+                        sortProduct({
+                            ...pag,
+                            page: 1,
+                            type: "desc",
+                            col: "price",
+                        })
+                    );
+                    break;
+                }
+                default: {
+                    dispatch(
+                        sortProduct({
+                            ...pag,
+                            page: 1,
+                            type: "asc",
+                            col: "id",
+                        })
+                    );
+                    break;
+                }
+
+            }
+        }, 500)
+
         setSortTitle(title);
         setIsShowSortBy(false);
     };

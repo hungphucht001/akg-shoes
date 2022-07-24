@@ -28,7 +28,6 @@ function Detail(props) {
             const result = await apiProduct.product(slug);
             if(!result) setIsEmpty(true)
             else setData(result)
-            window.screenTop(0)
         }
         getData()
 

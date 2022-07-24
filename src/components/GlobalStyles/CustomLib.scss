@@ -1,0 +1,53 @@
+//ant
+
+.ant-spin-dot-item {
+    background-color: #999 !important;
+}
+.infinite-scroll-component {
+    overflow: hidden !important;
+}
+
+.ant-radio-inner::after {
+    margin-left: -8.3px !important;
+    margin-top: -7.8px !important;
+    background-color: var(--color-dark) !important;
+}
+.ant-radio-checked .ant-radio-inner {
+    border-color: var(--color-dark) !important;
+}
+.ant-slider-handle:focus ,
+.ant-radio-input:focus + .ant-radio-inner {
+    box-shadow: 0 0 0 3px transparent !important;
+}
+
+.ant-slider-track {
+    background-color: var(--color-dark) !important;
+}
+
+.ant-slider-handle {
+    border: 2px solid var(--color-dark) !important;
+}
+.ant-modal-wrap {
+    z-index: 111111 !important;
+  }
+.ant-radio-wrapper + .ant-radio-wrapper{
+    margin-top: 10px;
+}
+.ant-row{
+    padding-top: 10px;
+padding-bottom: 20px;
+}
+
+// infinite-scroll-component
+
+.infinite-scroll-component__outerdiv{
+    width: 100%;
+}
+
+
+//swiper
+
+.swiper-backface-hidden .swiper-slide {
+    margin-bottom: 20px;
+  }
+

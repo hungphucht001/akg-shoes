@@ -1,4 +1,5 @@
 import * as request from '~/utils/request';
+import pagination from "~/config/pagination"
 
 export const homeProductApi = async()=>{
     try{
@@ -20,7 +21,7 @@ export const homeProductApi = async()=>{
     try{
         const res = await request.get('/products',{
             params: {
-                _limit: 8,
+                _limit: pagination.limit,
                 _page: pag.page,
                 s: pag.s,
                 col:pag.col,
