@@ -19,7 +19,12 @@ export const emptyProduct = () => {
     }
 
 }
-
+export const filterChangePrice = (arr) => {
+    return {
+        type: 'productList/filterChangePrice',
+        payload: arr
+    }
+}
 export const addPage = (pag) => {
     return {
         type: 'productList/addPage',
@@ -45,5 +50,27 @@ export const toggleCartComponent = (status) => {
     return {
         type: 'cart/toggleCartComponent',
         payload: status
+    }
+}
+
+export const addToCart = (cartItem) => {
+    return {
+        type: 'cart/addToCart',
+        payload: cartItem
+    }
+}
+
+export const updateCart = (cartItem) => {
+    return {
+        type: 'cart/updateCart',
+        payload: cartItem
+    }
+}
+
+
+export const setAuth = (data) => {
+    return {
+        type: 'auth/setAuth',
+        payload: data
     }
 }

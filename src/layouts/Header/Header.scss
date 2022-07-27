@@ -6,6 +6,7 @@
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
+       
     }
     .title{
         padding: 50px;
@@ -24,7 +25,7 @@
     .btn-shop-now{
         width: 170px;
         height: 60px;
-        background: #D99655;
+        background: var(--color-dark);
         display: inline-flex;
         font-family: 'Bebas Neue';
         font-style: normal;

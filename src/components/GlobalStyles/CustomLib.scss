@@ -3,6 +3,7 @@
 .ant-spin-dot-item {
     background-color: #999 !important;
 }
+
 .infinite-scroll-component {
     overflow: hidden !important;
 }
@@ -12,11 +13,13 @@
     margin-top: -7.8px !important;
     background-color: var(--color-dark) !important;
 }
+
 .ant-radio-checked .ant-radio-inner {
     border-color: var(--color-dark) !important;
 }
-.ant-slider-handle:focus ,
-.ant-radio-input:focus + .ant-radio-inner {
+
+.ant-slider-handle:focus,
+.ant-radio-input:focus+.ant-radio-inner {
     box-shadow: 0 0 0 3px transparent !important;
 }
 
@@ -27,20 +30,60 @@
 .ant-slider-handle {
     border: 2px solid var(--color-dark) !important;
 }
+
 .ant-modal-wrap {
     z-index: 111111 !important;
-  }
-.ant-radio-wrapper + .ant-radio-wrapper{
+}
+
+.ant-radio-wrapper+.ant-radio-wrapper {
     margin-top: 10px;
 }
-.ant-row{
+
+.ant-row {
     padding-top: 10px;
-padding-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.ant-modal-mask {
+    z-index: 111111 !important;
+}
+
+.ant-card-body {
+    padding: 15px !important;
+
+    a {
+        padding: 0 !important;
+    }
+
+    .ant-card-meta {
+        margin-top: 15px;
+    }
+
+}
+.ant-notification,
+.ant-drawer {
+    z-index: 111111 !important;
+}
+
+.ant-modal {
+    top: 40px !important;
+    width: 700px !important;
+}
+.modal-login{
+    width: 460px !important;
+}
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    background: #000 !important;
+    border-color: #000 !important;
+}
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before,
+.ant-radio-button-checked {
+    background-color: #000 !important;
 }
 
 // infinite-scroll-component
 
-.infinite-scroll-component__outerdiv{
+.infinite-scroll-component__outerdiv {
     width: 100%;
 }
 
@@ -49,5 +92,4 @@ padding-bottom: 20px;
 
 .swiper-backface-hidden .swiper-slide {
     margin-bottom: 20px;
-  }
-
+}

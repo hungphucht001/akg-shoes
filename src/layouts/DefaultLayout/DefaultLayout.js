@@ -8,16 +8,16 @@ import Footer from '../Footer'
 const cx = classNames.bind(styles)
 
 const propTypes = {
-    
+
 }
 
-function DefaultLayout({children}) {
+function DefaultLayout({ children }) {
     return (
-        <div className={cx('wrapper')}>   
-            <NavBar/>
+        <div className={cx('wrapper wrapper-app')}>
+            <NavBar />
             <div className={cx('stuff')}></div>
             {children}
-            <Footer/>
+            <Footer />
         </div>
     )
 }

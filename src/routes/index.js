@@ -1,35 +1,42 @@
+import { lazy } from 'react'
 import { DefaultLayout, LayoutBanner } from "~/layouts/DefaultLayout";
-import Detail from "~/pages/Detail";
-import Home from "~/pages/Home";
-import Products from "~/pages/Products";
-import Search from "~/components/Search";
-
 import routes from '~/config/routes'
 
-const privateRoutes = []
+const privateRoutes = [
+    {
+        path: routes.cart,
+        element: lazy(() => import('~/pages/Cart')),
+        layout: DefaultLayout
+    }
+]
 
 const publicRoutes = [
     {
-        path: routes.products+':slug',
-        element: Detail,
+        path: routes.products + ':slug',
+        element: lazy(() => import('~/pages/Detail')),
         layout: DefaultLayout
     },
     {
         path: routes.products,
-        element: Products,
+        element: lazy(() => import('~/pages/Products')),
         layout: DefaultLayout
     },
     {
-        path: routes.search,
-        element: Search,
+        path: routes.home,
+        element: lazy(() => import('~/pages/Home')),
+        layout: LayoutBanner
+    },
+    {
+        path: routes.login,
+        element: lazy(() => import('~/pages/Login')),
         layout: null
     },
     {
-        path: routes.home,
-        element: Home,
-        layout: LayoutBanner
-    }
+        path: routes.register,
+        element: lazy(() => import('~/pages/Register')),
+        layout: null
+    },
 ]
 
-export {privateRoutes, publicRoutes} 
+export { privateRoutes, publicRoutes }
 

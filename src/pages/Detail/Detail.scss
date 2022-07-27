@@ -1,10 +1,11 @@
 .detail{
     margin-top: 50px;
+    flex: 1;
     margin-bottom: 60px;
     .amount{
         margin-block: 20px;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         .btn{
             width: 30px;
@@ -16,7 +17,20 @@
             color: #fff;
             cursor: pointer;
         }
-        .number{
+
+        .amount-title{
+            margin-inline: 10px;
+            font-weight: 550;
         }
+    }
+    .btn-add{
+        color: var(--color-white);
+        background-color: var(--color-dark);
+        font-weight: 550;
+    }
+    .price span{
+        font-size: 18px;
+        color: var(--color-dark);
+        font-weight: 500;
     }
 }

@@ -25,11 +25,13 @@
     .filter-item + .filter-item{
         border-top: 1px solid #ccc;
     }
-}
-.space{
-    margin-inline:10px;
-}
-.limit_price{
-    color: rgb(74, 74, 74);
-    font-weight: 550;
+    .space{
+        margin-inline:10px;
+        display: inline-block;
+    }
+    
+    .limit_price{
+        color: rgb(74, 74, 74);
+        font-weight: 550;
+    }
 }

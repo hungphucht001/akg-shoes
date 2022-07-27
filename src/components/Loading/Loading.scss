@@ -1,20 +1,11 @@
-.loading-container {
-    padding: 30px;
+.wrapper-loading{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-}
-
-.spinner {
-    height: 50px;
-    width: 50px;
-    border: 7px solid rgb(133, 106, 214);
-    border-left: 7px solid rgb(96, 47, 153);
-    border-radius: 50%;
-    animation: spin infinite 1.5s linear;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
+    height: 100vh;
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 111111111111111;
 }

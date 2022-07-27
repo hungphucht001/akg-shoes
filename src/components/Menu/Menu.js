@@ -18,6 +18,15 @@ const propTypes = {
 
 function Menu(props) {
 
+    const [user, setUser] = useState(() => {
+        const userLocal = JSON.parse(localStorage.getItem('user'))
+        if (userLocal) {
+            return userLocal;
+        }
+        return {}
+    });
+
+
     const dispatch = useDispatch()
 
     const handleShowCartComponent = () => {
@@ -57,9 +66,19 @@ function Menu(props) {
                     <li className={cx('menu-item')}>
                         <a onClick={showModal} className={cx('nav-link')}>Search</a>
                     </li>
-                    <li className={cx('menu-item')}>
-                        <Link to='/wishlist' className={cx('nav-link')}>Wishlist</Link>
-                    </li>
+
+                    {user ?
+
+                        <li className={cx('menu-item')}>
+                            <Link to='/me' className={cx('nav-link')}>{user.name}</Link>
+                        </li>
+                        :
+                        <li className={cx('menu-item')}>
+                            <Link to='/login' className={cx('nav-link')}>Login</Link>
+                        </li>
+                    }
+
+
                     <li className={cx('menu-item')}>
                         <a onClick={handleShowCartComponent} className={cx('nav-link')}>Cart(0)</a>
                     </li>

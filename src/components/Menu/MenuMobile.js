@@ -70,7 +70,7 @@ function MenuMobile(props) {
                             <a onClick={showModal} className={cx('nav-link')}>Search</a>
                         </li>
                         <li className={cx('menu-item')}>
-                            <Link to='/wishlist' className={cx('nav-link')}>Wishlist</Link>
+                            <Link to='/login' className={cx('nav-link')}>Login</Link>
                         </li>
                         <li className={cx('menu-item')}>
                             <a onClick={handleShowCartComponent} className={cx('nav-link')}>Cart(0)</a>

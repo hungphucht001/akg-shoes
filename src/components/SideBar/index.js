@@ -3,24 +3,32 @@ import NumberFormat from "react-number-format";
 
 //redux
 import { useDispatch, useSelector } from 'react-redux';
-import { sortProduct, emptyProduct } from '~/redux/actions';
+import { sortProduct, emptyProduct, filterChangePrice } from '~/redux/actions';
 import { sortProductSelector } from '~/redux/selectors';
 
-import classNames from 'classnames/bind';
-import styles from './SideBar.scss';
 import { Radio, Slider } from 'antd';
+
+import pagination from '~/config/pagination';
+import './SideBar.scss'
 
 const propTypes = {};
 
 function SideBar(props) {
-    const [value, setValue] = useState('men');
-    const [inputValuePrice, setInputValuePrice] = useState([50000, 5000000]);
 
     const dispatch = useDispatch();
     const pag = useSelector(sortProductSelector);
 
+    const [inputValuePrice, setInputValuePrice] = useState([pag.min, pag.max]);
+
+    const [value, setValue] = useState(() => pag.s == 1 ? 'men' : 'women');
+
     const onChangePrice = (newValue) => {
         setInputValuePrice(newValue);
+
+        dispatch(emptyProduct());
+        setTimeout(() => {
+            dispatch(filterChangePrice(newValue))
+        }, 2000);
     };
 
     const formatter = (value) => {
@@ -36,6 +44,7 @@ function SideBar(props) {
             dispatch(
                 sortProduct({
                     ...pag,
+                    page: 1,
                     s: val === 'women' ? 2 : 1,
                 }),
             );
@@ -48,8 +57,8 @@ function SideBar(props) {
                 <h4>Category</h4>
             </div>
             <Radio.Group className='radio-group' onChange={onChange} value={value}>
-                <Radio value={'women'}>Women's shoes</Radio>
                 <Radio value={'men'}>Men's shoes</Radio>
+                <Radio value={'women'}>Women's shoes</Radio>
             </Radio.Group>
             <div className="filter-title mt-20 mb-10">
                 <h4>Price</h4>
@@ -58,8 +67,8 @@ function SideBar(props) {
                 <Slider
                     onChange={onChangePrice}
                     tipFormatter={formatter}
-                    min={50000}
-                    max={5000000}
+                    min={pagination.min}
+                    max={pagination.max}
                     range
                     defaultValue={inputValuePrice}
                 />

@@ -1,7 +1,10 @@
 const routes = {
     home: '/',
     products: '/products/',
-    search: '/search/'
+    search: '/search/',
+    login: '/login/',
+    register: '/register/',
+    cart: '/cart/'
 }
 
 export default routes

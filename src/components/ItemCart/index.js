@@ -13,26 +13,28 @@ const propTypes = {
 
 function ItemCart(props) {
 
-    const [quanlity, setquanlity] = useState(3);
+    const { item } = props
+    const [amount, setAmount] = useState(item.amount);
 
-    const handleMinus = () => {
-        setquanlity(prev => {
+    const handleDecrease = () => {
+        setAmount(prev => {
             if (prev === 1) {
-                console.log('xóa nha');
                 return 1;
             }
-
             return prev - 1;
         })
     }
-    const handlePlus = () => {
-        setquanlity(prev => {
+
+    const handleIncrease = () => {
+        setAmount(prev => {
             return prev + 1;
         })
     }
+
     const handleRemove = () => {
         //dispatch action remove in store cart
     }
+
     return (
         <div className={cx('cart-item')}>
             <div className={cx('item-image')}>
@@ -40,19 +42,19 @@ function ItemCart(props) {
             </div>
             <div className={cx('item-content')}>
                 <h4 className={cx('item-title')}>
-                    Giày Converse Run Star Giày Converse Run Star
+                    {item.name}
                 </h4>
                 <div className={cx('item-price')}>
                     <span>
-                        {quanlity} x 100.000.000đ
+                        {amount} x {item.price}
                     </span>
                 </div>
-                <div className={cx('item-quanlity')}>
-                    <FontAwesomeIcon onClick={handleMinus} className={cx('item-icon')} icon={faMinus} />
-                    <span className={cx('quanlity-title')}>
-                        {quanlity}
+                <div className={cx('item-amount')}>
+                    <FontAwesomeIcon onClick={handleDecrease} className={cx('item-icon')} icon={faMinus} />
+                    <span className={cx('amount-title')}>
+                        {amount}
                     </span>
-                    <FontAwesomeIcon onClick={handlePlus} className={cx('item-icon')} icon={faAdd} />
+                    <FontAwesomeIcon onClick={handleIncrease} className={cx('item-icon')} icon={faAdd} />
                 </div>
             </div>
             <div className={cx('item-remove')}>

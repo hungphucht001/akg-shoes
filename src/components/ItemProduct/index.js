@@ -39,7 +39,7 @@ function ItemProduct(props) {
             >
                 <Link
                     style={{
-                        padding: 15,
+                        padding: 0,
                     }}
                     to={routes.products + item.slug}
                 >

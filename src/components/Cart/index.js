@@ -1,10 +1,11 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { memo, useState, useEffect, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightLong } from '@fortawesome/free-solid-svg-icons';
 import styles from './Cart.scss';
 import classNames from 'classnames/bind';
 import ItemCart from '../ItemCart';
 import { Drawer } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,10 +17,12 @@ const cx = classNames.bind(styles);
 function Cart(props) {
 
     const [visible, setVisible] = useState(false);
+    const [data, setData] = useState(JSON.parse(localStorage.getItem('carts')) || []);
     const cartComponent = useSelector(cartComponentSelector)
     const dispatch = useDispatch()
-
     const isShow = cartComponent.visible
+
+    const navigate = useNavigate()
 
     const onClose = () => {
         dispatch(toggleCartComponent(false))
@@ -29,7 +32,20 @@ function Cart(props) {
         setVisible(isShow)
     }, [dispatch, isShow]);
 
+    const total = useMemo(() => {
+        return data.reduce((total, item) => {
+            return total + (item.price * item.amount)
+        }, 0)
+    }, [])
+
+    const handleToCart = () => {
+        dispatch(toggleCartComponent(false))
+        setTimeout(() => {
+            navigate('/cart')
+        }, 500)
+    }
     return (
+
         <Drawer
             className='cart-component'
             closable={false}
@@ -45,24 +61,20 @@ function Cart(props) {
                     </button>
                 </div>
                 <div className={cx('cart-content')}>
-                    <ItemCart />
-                    <ItemCart />
-                    <ItemCart />
-                    <ItemCart />
-                    <ItemCart />
-                    <ItemCart />
-                    <ItemCart />
+                    {
+                        data && data.map((item, index) => <ItemCart item={item} key={item.slug + index} />)
+                    }
                 </div>
-                <div className={cx('cart-footer')}>
+                {data && <div className={cx('cart-footer')}>
                     <div className={cx('wrap-total')}>
                         <span className={cx('total-title')}>Total:</span>
-                        <span className={cx('total-price')}>200.000.000 đ</span>
+                        <span className={cx('total-price')}>{total}đ</span>
                     </div>
                     <div className={cx('wrap-btn')}>
-                        <button>Cart</button>
+                        <button onClick={handleToCart}>Cart</button>
                         <button>Pay</button>
                     </div>
-                </div>
+                </div>}
             </div>
         </Drawer>
     );
