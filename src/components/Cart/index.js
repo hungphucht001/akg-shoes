@@ -17,6 +17,7 @@ const cx = classNames.bind(styles);
 function Cart(props) {
 
     const [visible, setVisible] = useState(false);
+
     const [data, setData] = useState(JSON.parse(localStorage.getItem('carts')) || []);
     const cartComponent = useSelector(cartComponentSelector)
     const dispatch = useDispatch()

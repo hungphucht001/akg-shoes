@@ -25,7 +25,7 @@ function Menu(props) {
         }
         return {}
     });
-    console.log(user)
+
     const dispatch = useDispatch()
 
     const handleShowCartComponent = () => {
